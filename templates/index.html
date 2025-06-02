@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictophone Trio</title>
+</head>
+<body>
+    <h1>🗣️ Dictophone</h1>
+    <button onclick="startRecording()">🎙️ Record (10 sec)</button>
+    <p id="status">Status: Ready</p>
+    <p id="original"></p>
+    <p id="translated"></p>
+    <audio id="audio" controls></audio>
+
+    <script>
+        function startRecording() {
+            document.getElementById("status").innerText = "Recording...";
+            fetch('/record', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("status").innerText = "Done";
+                    document.getElementById("original").innerText = "📝 Text: " + data.original;
+                    document.getElementById("translated").innerText = "🌍 Translation: " + data.translated;
+                    document.getElementById("audio").src = data.audio + '?t=' + new Date().getTime();
+                })
+                .catch(err => {
+                    document.getElementById("status").innerText = "Error: " + err;
+                });
+        }
+    </script>
+</body>
+</html>

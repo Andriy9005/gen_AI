@@ -1,0 +1,2 @@
+https://opus.nlpl.eu/results/uk&en/corpus-result-table
+https://object.pouta.csc.fi/OPUS-HPLT/v2/mono/uk.txt.gz
